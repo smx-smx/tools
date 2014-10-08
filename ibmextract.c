@@ -150,7 +150,7 @@ int main(int argc, char *argv[]){
 	}
 
 	if(start == 1){
-		dest_dir = ".";
+		dest_dir = strdup(".");
 	} else if(start < 2){
 		goto usage;
 	}
@@ -177,6 +177,7 @@ int main(int argc, char *argv[]){
 
 	char *fullpath = realpath(dest_dir, NULL);
 	sprintf(fullpath, "%s/%s", fullpath, remove_ext(basename(strdup(file_name))));
+	dest_dir = realloc(dest_dir, strlen(fullpath));
 	sprintf(dest_dir, "%s/%s", dest_dir, remove_ext(basename(strdup(file_name))));
 	printf("making dir %s\n", fullpath);
 	_mkdir(fullpath);
