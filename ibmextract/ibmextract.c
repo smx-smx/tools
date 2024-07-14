@@ -29,7 +29,12 @@
 #include <unistd.h>
 #include <getopt.h>
 
+#if defined(__linux__)
 #include <linux/limits.h>
+#elif defined(__CYGWIN__)
+#include <windef.h>
+#define PATH_MAX MAX_PATH
+#endif
 #include <ibmextract.h>
 
 char *remove_ext(const char* mystr) {
