@@ -1,0 +1,5 @@
+module stdlib {
+    requires cplusplus17
+    header "stdlib.h"
+    export *
+}
