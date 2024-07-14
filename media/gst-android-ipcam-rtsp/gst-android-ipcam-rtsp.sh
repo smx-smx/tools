@@ -38,10 +38,13 @@ echo "rtp server started: ${rtpsrv}"
 
 pipeline(){
 	# sadly, the current rtsp-server implementation expects the final element of these chains to be of type 'GstRTPBasePayload' with name "pay0", "pay1", ..., "payN"
-	# this means we cannot pipe the 'udpsrc' as-is, as it wouldn't have the "pt" (payload-type) element, even if the caps-string includes it ("payload=(int)26")
+	# this means we cannot pipe the 'udpsrc' as-is, as it wouldn't have the mandatory 'pt' (payload-type) element, even if the caps-string includes it ("payload=(int)26")
 	# we also cannot avoid using RTP in the "sender" pipeline since we need chunking (or the UDP packets might be too big and would be dropped)
 	# the workaround i came up with is to add a redundant decode-encode step which likely wastes some time (decode RTP and re-encode it)
 	# let me know if you find a better way
+	#
+	# NOTE: before this workaround, gstreamer would print warnings about 'pt' being missing and would attempt to continue regardless, producing a stream
+	# that was only usable by a few players (like ffplay, which probably applies heuristics) but not the major ones (vlc, gstreamer)
 	echo udpsrc uri="udp://127.0.0.1:19090" \
 		! "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)JPEG, a-framerate=(string)\"30\,000000\", payload=(int)26" \
 		! rtpjpegdepay ! rtpjpegpay name=pay0 \
