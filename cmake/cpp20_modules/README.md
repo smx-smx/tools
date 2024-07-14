@@ -3,16 +3,16 @@ C++ modules with CMake
 
 References:
 
-> How to use c++20 modules with CMake?
+> How to use c++20 modules with CMake?\
 https://stackoverflow.com/a/62499857/11782802
 
-> How to compile/use header unit modules under CLang C++?
+> How to compile/use header unit modules under CLang C++?\
 https://stackoverflow.com/a/67254709/11782802
 
-> Modules in Clang 11
+> Modules in Clang 11\
 https://mariusbancila.ro/blog/2020/05/15/modules-in-clang-11/
 
-> Using C++ Modules TS with standard headers on linux
+> Using C++ Modules TS with standard headers on linux\
 https://stackoverflow.com/a/48185537/11782802
 
 Helpful commands:
