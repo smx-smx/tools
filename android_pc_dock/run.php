@@ -58,6 +58,29 @@ function service_enable($service, bool $enable){
 	services_set($svcs);
 }
 
+function ime_get(){
+	return rtrim(ashell('settings', 'get', 'secure', 'default_input_method'));
+}
+
+function density_get(){
+	$out = rtrim(ashell('wm', 'density'));
+	if(!empty($out) && preg_match('/:\s*(\d+)/', $out, $m)){
+		return intval($m[1]);
+	}
+	return null;
+}
+
+$previous_ime = ime_get();
+$previous_density = density_get();
+if($empty($previous_ime)){
+	print("[WARNING]: could not retrieve current IME\n");
+	$previous_ime = 'com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME';
+}
+if(empty($previous_density)){
+	print("[WARNING]: could not retrieve current screen density!");
+	exit(1);
+}
+
 $rotation_svc = 'com.pranavpandey.rotation/com.pranavpandey.rotation.service.RotationService';
 
 /** disable and kill service **/
@@ -109,7 +132,7 @@ ashell('am', 'force-stop', 'com.pranavpandey.rotation');
 //ashell('pm', 'clear', 'com.pranavpandey.rotation');
 ashell('dumpsys', 'deviceidle', 'whitelist', '+com.pranavpandey.rotation');
 
-/** reset screen density */
-ashell('wm', 'density', '440');
-/** reset virtual keyboard */
-ashell('ime', 'set', 'com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME');
+/** restore screen density */
+ashell('wm', 'density', $previous_density);
+/** restore virtual keyboard */
+ashell('ime', 'set', $previous_ime);
