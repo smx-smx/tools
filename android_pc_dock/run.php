@@ -87,6 +87,9 @@ $rotation_svc = 'com.pranavpandey.rotation/com.pranavpandey.rotation.service.Rot
 service_enable($rotation_svc, false);
 ashell('am', 'force-stop', 'com.pranavpandey.rotation');
 
+/** make sure the app won't be killed */
+ashell('dumpsys', 'deviceidle', 'whitelist', '+com.pranavpandey.rotation');
+
 /** start app **/
 ashell('am', 'start', 'com.pranavpandey.rotation');
 
@@ -130,7 +133,6 @@ service_enable($rotation_svc, false);
 ashell('am', 'force-stop', 'com.pranavpandey.rotation');
 
 //ashell('pm', 'clear', 'com.pranavpandey.rotation');
-ashell('dumpsys', 'deviceidle', 'whitelist', '+com.pranavpandey.rotation');
 
 /** restore screen density */
 ashell('wm', 'density', $previous_density);
