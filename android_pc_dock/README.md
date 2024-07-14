@@ -1,6 +1,8 @@
 # android_pc_dock
 Tool to use an Android smartphone as if it was "docked" to a computer.
 
+![screenshot](screenshot.png)
+
 Prerequisites:
 - Install the `Rotation | Orientation Manager` application from the Google play store: [com.pranavpandey.rotation](https://play.google.com/store/apps/details?id=com.pranavpandey.rotation)
 Make sure you enable the accessibility service and grant all permissions to the application.
