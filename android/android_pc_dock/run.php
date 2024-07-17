@@ -72,7 +72,7 @@ function density_get(){
 
 $previous_ime = ime_get();
 $previous_density = density_get();
-if($empty($previous_ime)){
+if(empty($previous_ime)){
 	print("[WARNING]: could not retrieve current IME\n");
 	$previous_ime = 'com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME';
 }
