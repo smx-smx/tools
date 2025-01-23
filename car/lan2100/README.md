@@ -1,6 +1,6 @@
 # lan8900
 
-Tool to decrypt the `upgrade.lgu` file for the LG LAN8900 (Kia Carens/Kia Sportage, and others)
+Tool to decrypt the `upgrade.lgu` file for the LG LAN2100 (Kia Carens/Kia Sportage, and others)
 
 ## Details
 
